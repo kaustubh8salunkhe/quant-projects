@@ -53,3 +53,8 @@ The codebase is architected for headless execution within cloud environments.
 1. Select the **"Open in Colab"** badge above to instantiate the environment.
 2. Execute the notebook sequentially via `Runtime > Run all`.
 3. The environment will independently manage dependency installation, data ingestion, backtest compilation, and graphical rendering.
+
+## Future Enhancements
+* **Variance Reduction:** Upgrading the Monte Carlo engine with Antithetic Variates and Control Variates to achieve tighter convergence with fewer computational cycles.
+* **Market Neutrality:** Expanding the long-only momentum allocation into a Long/Short beta-neutral portfolio to isolate pure factor alpha from broader NSE market drawdowns.
+* **Vectorized Execution:** Refactoring the discrete backtesting loop into a strictly vectorized Pandas architecture to support high-frequency tick-data ingestion.
