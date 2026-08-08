@@ -1,58 +1,115 @@
 # Quantitative Research Suite: Cross-Sectional Momentum & Stochastic Derivatives Pricing
 
+
+
 ## Executive Summary
+
 This repository houses a bifurcated quantitative research engine developed to evaluate structural market anomalies and execute rigorous computational pricing models. The suite integrates a cross-sectional momentum backtesting environment for Indian large-cap equities alongside a high-performance, stochastic options pricing engine. 
+
+
 
 Designed with institutional realism in mind, the architecture deliberately imposes strict frictional costs and leverages foundational quantitative methodologies—ranging from discrete rebalancing logic to continuous-time stochastic differential equations.
 
+
+
 ---
+
+
 
 ## Part I: Cross-Sectional Equities Momentum (12-1 Factor)
 
+
+
 ### Architectural Overview
+
 The equities module executes a systematic 12-1 momentum strategy across a highly liquid basket of National Stock Exchange (NSE) constituents. The algorithm ranks the cross-section of equities based on trailing twelve-month returns, deliberately omitting the most recent one-month period to neutralize the effects of short-term mean reversion. 
 
+
+
 ### Empirical Achievements
+
 * **Frictional Resilience:** The model applies a hard 10-basis-point (bps) transaction cost per turnover event. Despite this strict friction constraint, the strategy yielded a positive annualized Sharpe ratio of 0.56.
+
 * **Out-of-Sample Robustness:** Tested across the highly volatile 2019–2024 window, the portfolio successfully navigated extreme market dislocations (including the 2020 liquidity crisis), sustaining a maximum drawdown of -26.03%—a highly acceptable risk parameter for an unhedged, long-only equity factor model.
 
+
+
 ### Structural Limitations & Drawbacks
+
 * **Long-Only Constraint:** The current iteration lacks a market-neutral architecture (e.g., longing the top decile and shorting the bottom decile). Consequently, the portfolio retains significant beta exposure to the broader Nifty 50 index.
+
 * **Liquidity and Slippage Assumptions:** While the 10-bps transaction cost accounts for basic brokerage and exchange fees, it does not fully capture order-book slippage or market impact costs during extreme tail events. 
+
 * **Equal Weighting:** The allocation mechanism weights the top three assets equally, neglecting volatility-parity or risk-contribution weighting schemes that could further optimize the Sharpe ratio.
 
+
+
 ---
+
+
 
 ## Part II: Stochastic Derivatives Pricing Engine
 
+
+
 ### Architectural Overview
+
 The derivatives module functions as a computational pricing and risk-management engine. It cross-validates the theoretical fair value of European options using two distinct mathematical frameworks: a closed-form analytical model and a numerical simulation engine utilizing 50,000 stochastic paths.
 
+
+
 ### Empirical Achievements
+
 * **Mathematical Convergence:** The Monte Carlo numerical engine (operating via a vectorized Geometric Brownian Motion process) achieved near-perfect convergence with the analytical Black-Scholes model. The internal Root Mean Square Error (RMSE) was restricted to a mere 0.0423%, confirming the integrity of the stochastic path generation.
+
 * **Dynamic Risk Sensitivities:** The model successfully derives first and second-order partial derivatives (Delta, Gamma, Vega), translating static pricing models into actionable, dynamic risk-management metrics required for neutral hedging.
+
 * **Surface Visualization:** The integration of 3D volatility-surface mapping allows for immediate visual inspection of term structure and moneyness behavior.
 
+
+
 ### Structural Limitations & Drawbacks
+
 * **Constant Volatility Assumption:** The foundational reliance on standard Black-Scholes mathematics inherently assumes that implied volatility remains constant across all strikes and expirations. It does not account for the empirical reality of the volatility smile or skew.
+
 * **Static Interest Rates:** The risk-free rate is modeled as a deterministic constant, whereas in live market environments, interest rates are stochastic and exhibit their own term structure.
+
 * **European Execution Only:** The current pricing logic does not compute the early-exercise premium characteristic of American-style options, limiting its application strictly to European-style derivatives.
+
+
 
 ---
 
+
+
 ## Technical Stack & Execution
+
 * **Core Computational Libraries:** `NumPy`, `SciPy`, `Pandas`
+
 * **Market Data Ingestion:** `yfinance`
+
 * **Data Visualization:** `Matplotlib`, `Seaborn`
 
+
+
 ### Deployment
+
 The codebase is architected for headless execution within cloud environments. 
 
+
+
 1. Select the **"Open in Colab"** badge above to instantiate the environment.
+
 2. Execute the notebook sequentially via `Runtime > Run all`.
+
 3. The environment will independently manage dependency installation, data ingestion, backtest compilation, and graphical rendering.
 
+
+
 ## Future Enhancements
+
 * **Variance Reduction:** Upgrading the Monte Carlo engine with Antithetic Variates and Control Variates to achieve tighter convergence with fewer computational cycles.
+
 * **Market Neutrality:** Expanding the long-only momentum allocation into a Long/Short beta-neutral portfolio to isolate pure factor alpha from broader NSE market drawdowns.
+
 * **Vectorized Execution:** Refactoring the discrete backtesting loop into a strictly vectorized Pandas architecture to support high-frequency tick-data ingestion.
