@@ -1,7 +1,5 @@
 # Quantitative Research Suite: Cross-Sectional Momentum & Stochastic Derivatives Pricing
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME/blob/main/Quantitative_Research_Suite.ipynb)
-
 ## Executive Summary
 This repository houses a bifurcated quantitative research engine developed to evaluate structural market anomalies and execute rigorous computational pricing models. The suite integrates a cross-sectional momentum backtesting environment for Indian large-cap equities alongside a high-performance, stochastic options pricing engine. 
 
